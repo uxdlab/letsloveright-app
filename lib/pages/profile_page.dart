@@ -125,122 +125,79 @@ class ProfilePage extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Marital Status",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Single",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Race",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Asian",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Height",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "5.4 ft",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Body",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Athletic",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Hair Length",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Long",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Fashion",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Classic",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
+            ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
+            ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
+            ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
+            ),
+            const BioFields(
+              field: "Marital Status",
+              data: "Single",
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class BioFields extends StatelessWidget {
+  const BioFields({Key? key, required this.field, required this.data})
+      : super(key: key);
+
+  final String field;
+  final String data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 5,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            field,
+            style: const TextStyle(fontSize: 15),
+          ),
+          Text(
+            data,
+            style: const TextStyle(fontSize: 15),
+          ),
+        ],
       ),
     );
   }

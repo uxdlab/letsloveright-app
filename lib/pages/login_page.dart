@@ -73,8 +73,8 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 300,
-                margin: const EdgeInsets.all(20),
+                width: double.infinity,
+                margin: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
                   color: Colors.purple,
                   borderRadius: BorderRadius.circular(10),
