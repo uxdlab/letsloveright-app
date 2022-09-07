@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lets_love_right/components/drawer_pages.dart';
 
 class SideDrawer extends StatelessWidget {
@@ -205,6 +206,27 @@ class SideDrawer extends StatelessWidget {
               ),
             ),
           ),
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.purple,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              child: const Text(
+                "Logout",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
         ],
       ),
     );

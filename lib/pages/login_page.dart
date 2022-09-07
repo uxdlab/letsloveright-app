@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:lets_love_right/main_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lets_love_right/pages/signup_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future _signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _usernameController.text,
+      password: _passwordController.text,
+    );
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +63,9 @@ class LoginPage extends StatelessWidget {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.mail_outline,
                       color: Colors.grey,
@@ -60,8 +83,9 @@ class LoginPage extends StatelessWidget {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.lock_outline,
                       color: Colors.grey,
@@ -80,14 +104,7 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const MainPage(),
-                      ),
-                    );
-                  },
+                  onPressed: _signIn,
                   child: const Text(
                     "SIGN IN",
                     style: TextStyle(

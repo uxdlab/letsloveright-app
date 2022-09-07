@@ -178,7 +178,7 @@ class ScrollList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
-                "Alexas Manison",
+                "Alexas Mansion",
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,

@@ -3,14 +3,14 @@ import 'package:lets_love_right/pages/chat_page.dart';
 import 'package:lets_love_right/pages/home_page.dart';
 import 'package:lets_love_right/pages/profile_page.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class BottomNavigator extends StatefulWidget {
+  const BottomNavigator({Key? key}) : super(key: key);
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<BottomNavigator> createState() => _BottomNavigatorState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _BottomNavigatorState extends State<BottomNavigator> {
   int _selectedIndex = 0;
 
   final List _pages = [

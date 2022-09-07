@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>841458618047-io8i95dbp2tt8aern40ellbe7cg3mdg0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.841458618047-io8i95dbp2tt8aern40ellbe7cg3mdg0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDJfBpLIncFbC33rdDm8cgs6if1bfpeR58</string>
+	<key>GCM_SENDER_ID</key>
+	<string>841458618047</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.letsLoveRight</string>
+	<key>PROJECT_ID</key>
+	<string>let-s-love-right</string>
+	<key>STORAGE_BUCKET</key>
+	<string>let-s-love-right.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:841458618047:ios:8345b047e3a5b8aba2000a</string>
+</dict>
+</plist>

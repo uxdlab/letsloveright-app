@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "841458618047",
+    "project_id": "let-s-love-right",
+    "storage_bucket": "let-s-love-right.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841458618047:android:136c3f9ea7761526a2000a",
+        "android_client_info": {
+          "package_name": "com.example.lets_love_right"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841458618047-mjon8b8naejbn4av9i3fbut74dgaf4vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBTXxhV5i9n2EfnJ9CMafgA8fGe74GknE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841458618047-mjon8b8naejbn4av9i3fbut74dgaf4vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
