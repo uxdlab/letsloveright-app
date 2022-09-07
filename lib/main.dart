@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Let's Love Right",
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         textTheme: GoogleFonts.ubuntuTextTheme(),
         appBarTheme: const AppBarTheme(
           elevation: 0,
