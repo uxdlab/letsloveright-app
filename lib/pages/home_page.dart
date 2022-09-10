@@ -47,8 +47,8 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 250,
+          Expanded(
+            flex: 10,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
@@ -70,6 +70,7 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Expanded(
+            flex: 15,
             child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (e, index) {
@@ -127,6 +128,26 @@ class TopCard extends StatelessWidget {
           alignment: const Alignment(0, 0.65),
           child: const Text(
             "5 KM",
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          width: 50,
+          alignment: const Alignment(-8, 0.6),
+          child: const Icon(
+            Icons.local_fire_department_outlined,
+            color: Colors.white,
+          ),
+        ),
+        Container(
+          width: 75,
+          alignment: const Alignment(-4, 0.6),
+          child: const Text(
+            "90%",
             style: TextStyle(
               fontSize: 15,
               color: Colors.white,

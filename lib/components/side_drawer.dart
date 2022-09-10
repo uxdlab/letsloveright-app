@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lets_love_right/components/drawer_pages.dart';
+import 'package:lets_love_right/pages/onboarding_screen.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({Key? key}) : super(key: key);
@@ -215,7 +216,19 @@ class SideDrawer extends StatelessWidget {
             ),
             child: TextButton(
               onPressed: () {
-                FirebaseAuth.instance.signOut();
+                FirebaseAuth.instance
+                    .signOut()
+                    .then(
+                      (value) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const OnboardingScreen(),
+                        ),
+                      ),
+                    )
+                    .catchError(
+                      (onError) => debugPrint("Error Occurred On Logout"),
+                    );
               },
               child: const Text(
                 "Logout",

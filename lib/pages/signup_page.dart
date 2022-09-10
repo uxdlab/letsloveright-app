@@ -1,8 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lets_love_right/pages/login_page.dart';
+import 'package:lets_love_right/pages/SignupQuestions/signup_form_1.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  _signUp() {
+    if (_passwordController.text == _confirmPasswordController.text) {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: _emailController.text,
+            password: _passwordController.text,
+          )
+          .then(
+            (value) => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const SignupQuestionsOne(),
+              ),
+            ),
+          )
+          .catchError(
+            (onError) => debugPrint("Error Occurred While SignUp"),
+          );
+    } else {
+      debugPrint("Password Does Not Match");
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,32 +77,11 @@ class SignupPage extends StatelessWidget {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
-                      Icons.person_outlined,
-                      color: Colors.grey,
-                    ),
-                    border: InputBorder.none,
-                    fillColor: Colors.cyan,
-                    hintText: "Full Name",
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 8,
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.mail_outline,
+                      Icons.email_outlined,
                       color: Colors.grey,
                     ),
                     border: InputBorder.none,
@@ -79,8 +100,10 @@ class SignupPage extends StatelessWidget {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.lock_outline,
                       color: Colors.grey,
@@ -92,6 +115,29 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
               Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextField(
+                  controller: _confirmPasswordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.lock_outline,
+                      color: Colors.grey,
+                    ),
+                    border: InputBorder.none,
+                    hintText: "Confirm Password",
+                  ),
+                ),
+              ),
+              Container(
                 width: double.infinity,
                 margin: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
@@ -99,7 +145,7 @@ class SignupPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: _signUp,
                   child: const Text(
                     "SIGN UP",
                     style: TextStyle(

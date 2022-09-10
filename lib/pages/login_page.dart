@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lets_love_right/pages/home_page.dart';
 import 'package:lets_love_right/pages/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,12 +13,29 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _showError = false;
 
-  _signIn(){
-    FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _usernameController.text,
-      password: _passwordController.text,
-    );
+  _signIn() {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+          email: _usernameController.text,
+          password: _passwordController.text,
+        )
+        .then(
+          (value) => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const HomePage(),
+            ),
+          ),
+        )
+        .catchError(
+          (onError) => setState(
+            () {
+              _showError = true;
+            },
+          ),
+        );
   }
 
   @override
@@ -55,7 +73,28 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.grey,
                 ),
               ),
-              const SizedBox(height: 20),
+              _showError
+                  ? Container(
+                      margin: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      color: Colors.red[200],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.error_outline, color: Colors.red),
+                          SizedBox(width: 20),
+                          Text(
+                            "Incorrect Username or Password",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -85,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: TextField(
                   controller: _passwordController,
+                  obscureText: true,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.lock_outline,
