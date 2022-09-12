@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_love_right/pages/home_page.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class SignupQuestionsFour extends StatefulWidget {
   const SignupQuestionsFour({Key? key}) : super(key: key);
@@ -11,6 +13,15 @@ class SignupQuestionsFour extends StatefulWidget {
 }
 
 class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
+  final storageRef = FirebaseStorage.instance.ref();
+  final _storageBox = Hive.box("hiveBox");
+
+  final _education = TextEditingController();
+  final _salary = TextEditingController();
+  final _relationType = TextEditingController();
+  final _personality = TextEditingController();
+  String _imageUrl = "";
+
   String _doYouDrink = "No";
   _doYouDrinkDropdown(String? selectedValue) {
     setState(() {
@@ -33,6 +44,39 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
         debugPrint("Error while uploading image");
       }
     });
+
+    try {
+      if (image != null) {
+        final imageRef = storageRef.child("images/${image.name}");
+        await imageRef.putFile(_imageFile);
+        _imageUrl = await imageRef.getDownloadURL();
+      }
+    } on FirebaseException catch (e) {
+      debugPrint(e.message);
+    }
+  }
+
+  _handleSubmit() async {
+    final List<dynamic> page4Content = [
+      {
+        "education": _education.text,
+        "doYouDrink": _doYouDrink,
+        "salary": _salary.text,
+        "relationType": _relationType.text,
+        "personality": _personality.text,
+        "imageUrl": _imageUrl,
+      },
+    ];
+
+    _storageBox.put("Page_4_Content", page4Content.toString());
+    debugPrint(_storageBox.get("Page_4_Content"));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const HomePage(),
+      ),
+    );
   }
 
   @override
@@ -79,8 +123,9 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _education,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.school_outlined,
                       color: Colors.grey,
@@ -138,8 +183,9 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _salary,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.monetization_on_outlined,
                       color: Colors.grey,
@@ -159,8 +205,9 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _relationType,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.favorite_border,
                       color: Colors.grey,
@@ -180,8 +227,9 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _personality,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.person_outline,
                       color: Colors.grey,
@@ -234,14 +282,15 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const HomePage(),
-                      ),
-                    );
-                  },
+                  // onPressed: () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (_) => const HomePage(),
+                  //     ),
+                  //   );
+                  // },
+                  onPressed: _handleSubmit,
                   child: const Text(
                     "Save",
                     style: TextStyle(

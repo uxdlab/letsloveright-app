@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lets_love_right/pages/SignupQuestions/signup_form_3.dart';
 
 class SignupQuestionsTwo extends StatefulWidget {
@@ -9,7 +10,12 @@ class SignupQuestionsTwo extends StatefulWidget {
 }
 
 class _SignupQuestionsTwoState extends State<SignupQuestionsTwo> {
-  String _bodyType = "Medium";
+  final _storageBox = Hive.box("hiveBox");
+
+  final _height = TextEditingController();
+  final _fashion = TextEditingController();
+
+  String _bodyType = "Athletic";
   _bodyTypeDropdown(String? selectedValue) {
     setState(() {
       _bodyType = selectedValue!;
@@ -35,6 +41,29 @@ class _SignupQuestionsTwoState extends State<SignupQuestionsTwo> {
     setState(() {
       _eyeColor = selectedValue!;
     });
+  }
+
+  _handleSubmit() {
+    final List<dynamic> page2Content = [
+      {
+        "height": _height.text,
+        "bodyType": _bodyType,
+        "hairLength": _hairLength,
+        "hairColour": _hairColor,
+        "eyeColour": _eyeColor,
+        "fashion": _fashion.text
+      },
+    ];
+
+    _storageBox.put("page2Content", page2Content.toString());
+    debugPrint(_storageBox.get("page2Content"));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const SignupQuestionsThree(),
+      ),
+    );
   }
 
   @override
@@ -70,14 +99,15 @@ class _SignupQuestionsTwoState extends State<SignupQuestionsTwo> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _height,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.person_outline,
                       color: Colors.grey,
                     ),
                     border: InputBorder.none,
-                    hintText: "Height",
+                    hintText: "Height (in Centimetre)",
                   ),
                 ),
               ),
@@ -107,8 +137,8 @@ class _SignupQuestionsTwoState extends State<SignupQuestionsTwo> {
                       underline: const SizedBox(),
                       items: const [
                         DropdownMenuItem(
-                          value: "Medium",
-                          child: Text("Medium"),
+                          value: "Athletic",
+                          child: Text("Athletic"),
                         ),
                         DropdownMenuItem(
                           value: "Skinny",
@@ -259,8 +289,9 @@ class _SignupQuestionsTwoState extends State<SignupQuestionsTwo> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _fashion,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.female,
                       color: Colors.grey,
@@ -278,14 +309,7 @@ class _SignupQuestionsTwoState extends State<SignupQuestionsTwo> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const SignupQuestionsThree(),
-                      ),
-                    );
-                  },
+                  onPressed: _handleSubmit,
                   child: const Text(
                     "CONTINUE",
                     style: TextStyle(

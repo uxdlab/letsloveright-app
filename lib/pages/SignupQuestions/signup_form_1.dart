@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lets_love_right/pages/SignupQuestions/signup_form_2.dart';
 
 class SignupQuestionsOne extends StatefulWidget {
@@ -9,6 +10,14 @@ class SignupQuestionsOne extends StatefulWidget {
 }
 
 class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
+  final _storageBox = Hive.box("hiveBox");
+
+  final _name = TextEditingController();
+  final _city = TextEditingController();
+  final _country = TextEditingController();
+  final _zipCode = TextEditingController();
+  final _race = TextEditingController();
+
   String _genderValue = "Male";
   _genderDropDown(String? selectedValue) {
     setState(() {
@@ -21,6 +30,30 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
     setState(() {
       _maritalStatus = selectedValue!;
     });
+  }
+
+  _handleSubmit() {
+    final List<dynamic> page1Content = [
+      {
+        "name": _name.text,
+        "city": _city.text,
+        "country": _country.text,
+        "zipCode": _zipCode.text,
+        "gender": _genderValue,
+        "maritalStatus": _maritalStatus,
+        "race": _race.text,
+      },
+    ];
+
+    _storageBox.put("Page_1_Content", page1Content.toString());
+    debugPrint(_storageBox.get("Page_1_Content"));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const SignupQuestionsTwo(),
+      ),
+    );
   }
 
   @override
@@ -54,8 +87,9 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _name,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.person_outline,
                       color: Colors.grey,
@@ -75,8 +109,9 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _city,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.map_outlined,
                       color: Colors.grey,
@@ -96,8 +131,9 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _country,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.pin_drop_outlined,
                       color: Colors.grey,
@@ -117,8 +153,9 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _zipCode,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.key,
                       color: Colors.grey,
@@ -233,8 +270,9 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _race,
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.person_outline,
                       color: Colors.grey,
@@ -252,14 +290,15 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const SignupQuestionsTwo(),
-                      ),
-                    );
-                  },
+                  // onPressed: () {
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (_) => const SignupQuestionsTwo(),
+                  //     ),
+                  //   );
+                  // },
+                  onPressed: _handleSubmit,
                   child: const Text(
                     "CONTINUE",
                     style: TextStyle(

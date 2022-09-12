@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lets_love_right/pages/SignupQuestions/signup_form_4.dart';
 
 class SignupQuestionsThree extends StatefulWidget {
@@ -9,11 +10,38 @@ class SignupQuestionsThree extends StatefulWidget {
 }
 
 class _SignupQuestionsThreeState extends State<SignupQuestionsThree> {
+  final _storageBox = Hive.box("hiveBox");
+
+  final _christian = TextEditingController();
+  final _denomination = TextEditingController();
+  final _occupation = TextEditingController();
+
   String _churchInvolvement = "Frequent";
   _churchInvolvementDropdown(String? selectedValue) {
     setState(() {
       _churchInvolvement = selectedValue!;
     });
+  }
+
+  _handleSubmit() {
+    final List<dynamic> page3Content = [
+      {
+        "christian": _christian.text,
+        "denomination": _denomination.text,
+        "churchInvolvement": _churchInvolvement,
+        "occupation": _occupation.text,
+      },
+    ];
+
+    _storageBox.put("Page_3_Content", page3Content.toString());
+    debugPrint(_storageBox.get("Page_3_Content"));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const SignupQuestionsFour(),
+      ),
+    );
   }
 
   @override
@@ -60,8 +88,9 @@ class _SignupQuestionsThreeState extends State<SignupQuestionsThree> {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                controller: _christian,
+                decoration: const InputDecoration(
                   prefixIcon: Icon(
                     Icons.person_outline,
                     color: Colors.grey,
@@ -81,8 +110,9 @@ class _SignupQuestionsThreeState extends State<SignupQuestionsThree> {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                controller: _denomination,
+                decoration: const InputDecoration(
                   prefixIcon: Icon(
                     Icons.auto_fix_high,
                     color: Colors.grey,
@@ -158,8 +188,9 @@ class _SignupQuestionsThreeState extends State<SignupQuestionsThree> {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                controller: _occupation,
+                decoration: const InputDecoration(
                   prefixIcon: Icon(
                     Icons.laptop,
                     color: Colors.grey,
@@ -177,14 +208,15 @@ class _SignupQuestionsThreeState extends State<SignupQuestionsThree> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const SignupQuestionsFour(),
-                    ),
-                  );
-                },
+                // onPressed: () {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (_) => const SignupQuestionsFour(),
+                //     ),
+                //   );
+                // },
+                onPressed: _handleSubmit,
                 child: const Text(
                   "CONTINUE",
                   style: TextStyle(
