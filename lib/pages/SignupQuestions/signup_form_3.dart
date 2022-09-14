@@ -24,17 +24,19 @@ class _SignupQuestionsThreeState extends State<SignupQuestionsThree> {
   }
 
   _handleSubmit() {
-    final List<dynamic> page3Content = [
-      {
-        "christian": _christian.text,
-        "denomination": _denomination.text,
-        "churchInvolvement": _churchInvolvement,
-        "occupation": _occupation.text,
-      },
-    ];
+    // final page3Content = <String, dynamic>{
+    //   "christian": _christian.text,
+    //   "denomination": _denomination.text,
+    //   "churchInvolvement": _churchInvolvement,
+    //   "occupation": _occupation.text,
+    // };
 
-    _storageBox.put("Page_3_Content", page3Content.toString());
-    debugPrint(_storageBox.get("Page_3_Content"));
+    _storageBox.put("christian", _christian.text);
+    _storageBox.put("denomination", _denomination.text);
+    _storageBox.put("churchInvolvement", _churchInvolvement);
+    _storageBox.put("occupation", _occupation.text);
+
+    // debugPrint(_storageBox.get("Page_3_Content"));
 
     Navigator.push(
       context,

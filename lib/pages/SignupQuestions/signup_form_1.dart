@@ -33,20 +33,25 @@ class _SignupQuestionsOneState extends State<SignupQuestionsOne> {
   }
 
   _handleSubmit() {
-    final List<dynamic> page1Content = [
-      {
-        "name": _name.text,
-        "city": _city.text,
-        "country": _country.text,
-        "zipCode": _zipCode.text,
-        "gender": _genderValue,
-        "maritalStatus": _maritalStatus,
-        "race": _race.text,
-      },
-    ];
+    // final page1Content = <String, dynamic>{
+    //   "name": _name.text,
+    //   "city": _city.text,
+    //   "country": _country.text,
+    //   "zipCode": _zipCode.text,
+    //   "gender": _genderValue,
+    //   "maritalStatus": _maritalStatus,
+    //   "race": _race.text,
+    // };
 
-    _storageBox.put("Page_1_Content", page1Content.toString());
-    debugPrint(_storageBox.get("Page_1_Content"));
+    _storageBox.put("name", _name.text);
+    _storageBox.put("city", _city.text);
+    _storageBox.put("country", _country.text);
+    _storageBox.put("zipCode", _zipCode.text);
+    _storageBox.put("gender", _genderValue);
+    _storageBox.put("maritalStatus", _maritalStatus);
+    _storageBox.put("race", _race.text);
+
+    // debugPrint(_storageBox.get("Page_1_Content"));
 
     Navigator.push(
       context,

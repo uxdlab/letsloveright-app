@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:lets_love_right/components/side_drawer.dart';
 import 'package:lets_love_right/pages/view_all_page.dart';
+import 'package:lets_love_right/components/side_drawer.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +52,8 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(
-            flex: 10,
+          SizedBox(
+            height: 225,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
@@ -70,7 +75,6 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Expanded(
-            flex: 15,
             child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (e, index) {

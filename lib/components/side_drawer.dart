@@ -1,10 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_love_right/components/drawer_pages.dart';
 import 'package:lets_love_right/pages/onboarding_screen.dart';
 
-class SideDrawer extends StatelessWidget {
+class SideDrawer extends StatefulWidget {
   const SideDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<SideDrawer> createState() => _SideDrawerState();
+}
+
+class _SideDrawerState extends State<SideDrawer> {
+  final user = FirebaseAuth.instance.currentUser!;
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  String _username = "";
+  String _imageUrl = "";
+
+  _readData() async {
+    final userId = user.uid;
+    final docRef = db.collection("users").doc(userId);
+
+    docRef.get().then(
+      (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        debugPrint(data["name"]);
+        debugPrint(data["imageUrl"]);
+        setState(() {
+          _username = data["name"];
+          _imageUrl = data["imageUrl"];
+        });
+      },
+      onError: (e) => debugPrint("Error getting document: $e"),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _readData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +54,10 @@ class SideDrawer extends StatelessWidget {
                 Container(
                   height: 100,
                   width: 100,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage("assets/images/model.png"),
+                      image: NetworkImage(_imageUrl),
                       alignment: Alignment.topCenter,
                       fit: BoxFit.cover,
                     ),
@@ -32,18 +68,18 @@ class SideDrawer extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
-                        "Himanshu Masant",
-                        style: TextStyle(
+                        _username,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
-                        "@himanshu_101",
-                        style: TextStyle(
+                        "@${_username}_101",
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.grey,
                           fontWeight: FontWeight.bold,

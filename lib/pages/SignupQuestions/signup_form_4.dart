@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lets_love_right/pages/home_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class SignupQuestionsFour extends StatefulWidget {
@@ -15,6 +17,9 @@ class SignupQuestionsFour extends StatefulWidget {
 class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
   final storageRef = FirebaseStorage.instance.ref();
   final _storageBox = Hive.box("hiveBox");
+
+  final user = FirebaseAuth.instance.currentUser!;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   final _education = TextEditingController();
   final _salary = TextEditingController();
@@ -57,19 +62,14 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
   }
 
   _handleSubmit() async {
-    final List<dynamic> page4Content = [
-      {
-        "education": _education.text,
-        "doYouDrink": _doYouDrink,
-        "salary": _salary.text,
-        "relationType": _relationType.text,
-        "personality": _personality.text,
-        "imageUrl": _imageUrl,
-      },
-    ];
+    _storageBox.put("education", _education.text);
+    _storageBox.put("doYouDrink", _doYouDrink);
+    _storageBox.put("salary", _salary.text);
+    _storageBox.put("relationType", _relationType.text);
+    _storageBox.put("personality", _personality.text);
+    _storageBox.put("imageUrl", _imageUrl);
 
-    _storageBox.put("Page_4_Content", page4Content.toString());
-    debugPrint(_storageBox.get("Page_4_Content"));
+    _saveData();
 
     Navigator.push(
       context,
@@ -77,6 +77,42 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
         builder: (_) => const HomePage(),
       ),
     );
+  }
+
+  _saveData() {
+    final dataObj = <String, dynamic>{
+      "name": _storageBox.get("name"),
+      "city": _storageBox.get("city"),
+      "country": _storageBox.get("country"),
+      "zipCode": _storageBox.get("zipCode"),
+      "gender": _storageBox.get("gender"),
+      "maritalStatus": _storageBox.get("maritalStatus"),
+      "race": _storageBox.get("race"),
+      "height": _storageBox.get("height"),
+      "bodyType": _storageBox.get("bodyType"),
+      "hairLength": _storageBox.get("hairLength"),
+      "hairColour": _storageBox.get("hairColour"),
+      "eyeColour": _storageBox.get("eyeColour"),
+      "fashion": _storageBox.get("fashion"),
+      "christian": _storageBox.get("christian"),
+      "denomination": _storageBox.get("denomination"),
+      "churchInvolvement": _storageBox.get("churchInvolvement"),
+      "occupation": _storageBox.get("occupation"),
+      "education": _storageBox.get("education"),
+      "doYouDrink": _storageBox.get("doYouDrink"),
+      "salary": _storageBox.get("salary"),
+      "relationType": _storageBox.get("relationType"),
+      "personality": _storageBox.get("personality"),
+      "imageUrl": _storageBox.get("imageUrl"),
+    };
+
+    final userId = user.uid;
+
+    if (_storageBox.get("imageUrl") != "") {
+      db.collection("users").doc(userId).set(dataObj).onError(
+            (error, _) => debugPrint("Error Storing Data to Firestore, $error"),
+          );
+    }
   }
 
   @override
@@ -282,14 +318,6 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  // onPressed: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (_) => const HomePage(),
-                  //     ),
-                  //   );
-                  // },
                   onPressed: _handleSubmit,
                   child: const Text(
                     "Save",

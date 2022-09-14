@@ -44,19 +44,23 @@ class _SignupQuestionsTwoState extends State<SignupQuestionsTwo> {
   }
 
   _handleSubmit() {
-    final List<dynamic> page2Content = [
-      {
-        "height": _height.text,
-        "bodyType": _bodyType,
-        "hairLength": _hairLength,
-        "hairColour": _hairColor,
-        "eyeColour": _eyeColor,
-        "fashion": _fashion.text
-      },
-    ];
+    // final page2Content = <String, dynamic>{
+    //   "height": _height.text,
+    //   "bodyType": _bodyType,
+    //   "hairLength": _hairLength,
+    //   "hairColour": _hairColor,
+    //   "eyeColour": _eyeColor,
+    //   "fashion": _fashion.text
+    // };
 
-    _storageBox.put("page2Content", page2Content.toString());
-    debugPrint(_storageBox.get("page2Content"));
+    _storageBox.put("height", _height.text);
+    _storageBox.put("bodyType", _bodyType);
+    _storageBox.put("hairLength", _hairLength);
+    _storageBox.put("hairColour", _hairColor);
+    _storageBox.put("eyeColour", _eyeColor);
+    _storageBox.put("fashion", _fashion.text);
+
+    // debugPrint(_storageBox.get("page2Content"));
 
     Navigator.push(
       context,

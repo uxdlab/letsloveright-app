@@ -13,7 +13,7 @@ class BottomNavigator extends StatefulWidget {
 class _BottomNavigatorState extends State<BottomNavigator> {
   int _selectedIndex = 0;
 
-  final List _pages = [
+  final List<dynamic> _pages = [
     const HomePage(),
     const ChatPage(),
     const ProfilePage(),
