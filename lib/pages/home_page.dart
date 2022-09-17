@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lets_love_right/model/firebase_data.dart';
 import 'package:lets_love_right/pages/view_all_page.dart';
 import 'package:lets_love_right/components/side_drawer.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+   // String userName = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
