@@ -16,17 +16,18 @@ class _SideDrawerState extends State<SideDrawer> {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   String _username = "";
-  String _imageUrl = "";
+  String _imageUrl =
+      "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif";
+  String _email = "";
 
-  _readData() async {
+  _readData() {
     final userId = user.uid;
+    _email = user.email!;
     final docRef = db.collection("users").doc(userId);
 
     docRef.get().then(
       (DocumentSnapshot doc) {
         final data = doc.data() as Map<String, dynamic>;
-        debugPrint(data["name"]);
-        debugPrint(data["imageUrl"]);
         setState(() {
           _username = data["name"];
           _imageUrl = data["imageUrl"];
@@ -78,7 +79,7 @@ class _SideDrawerState extends State<SideDrawer> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        "@${_username}_101",
+                        _email,
                         style: const TextStyle(
                           fontSize: 15,
                           color: Colors.grey,

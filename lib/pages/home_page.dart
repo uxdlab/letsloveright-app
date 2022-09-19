@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lets_love_right/model/firebase_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_love_right/pages/view_all_page.dart';
+import 'package:lets_love_right/components/user_page.dart';
 import 'package:lets_love_right/components/side_drawer.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,10 +12,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   // String userName = "";
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  List _dataList = [];
+
+  _readData() async {
+    final docRef = db.collection("users");
+    QuerySnapshot querySnapshot = await docRef.get();
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    setState(() {
+      _dataList = allData;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _readData();
+  }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("List Length : ${_dataList.length}");
+
+    if (_dataList.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("Loading ..."),
+        ),
+        body: const Center(
+          child: Text("Loading ..."),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("All Matches"),
@@ -60,9 +90,12 @@ class _HomePageState extends State<HomePage> {
             height: 225,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
+                itemCount: _dataList.length,
                 itemBuilder: (e, index) {
-                  return TopCard(imageNumber: index);
+                  return TopCard(
+                    userName: _dataList[index]["name"],
+                    imageUrl: _dataList[index]["imageUrl"],
+                  );
                 }),
           ),
           Row(
@@ -80,9 +113,12 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: _dataList.length,
                 itemBuilder: (e, index) {
-                  return ScrollList(imageNumber: index);
+                  return ScrollList(
+                    userName: _dataList[index]["name"],
+                    imageUrl: _dataList[index]["imageUrl"],
+                  );
                 }),
           ),
         ],
@@ -92,9 +128,11 @@ class _HomePageState extends State<HomePage> {
 }
 
 class TopCard extends StatelessWidget {
-  const TopCard({Key? key, required this.imageNumber}) : super(key: key);
+  const TopCard({Key? key, required this.imageUrl, required this.userName})
+      : super(key: key);
 
-  final int imageNumber;
+  final String imageUrl;
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +143,7 @@ class TopCard extends StatelessWidget {
           margin: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/model_$imageNumber.png"),
+              image: NetworkImage(imageUrl),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(15),
@@ -122,9 +160,9 @@ class TopCard extends StatelessWidget {
         Container(
           width: 200,
           alignment: const Alignment(0.1, 0.5),
-          child: const Text(
-            "Alexas Mansion",
-            style: TextStyle(
+          child: Text(
+            userName,
+            style: const TextStyle(
               fontSize: 18,
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -169,9 +207,11 @@ class TopCard extends StatelessWidget {
 }
 
 class ScrollList extends StatelessWidget {
-  const ScrollList({Key? key, required this.imageNumber}) : super(key: key);
+  const ScrollList({Key? key, required this.imageUrl, required this.userName})
+      : super(key: key);
 
-  final int imageNumber;
+  final String imageUrl;
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +237,7 @@ class ScrollList extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               image: DecorationImage(
-                image: AssetImage("assets/images/model_$imageNumber.png"),
+                image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
@@ -205,15 +245,15 @@ class ScrollList extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                "Alexas Mansion",
-                style: TextStyle(
+                userName,
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 "5 KM",
                 style: TextStyle(
                   fontSize: 15,
@@ -224,7 +264,14 @@ class ScrollList extends StatelessWidget {
           ),
           const SizedBox(width: 15),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => UserPage(userName: userName),
+                ),
+              );
+            },
             child: const Text(
               "View",
               style: TextStyle(color: Colors.purple),
