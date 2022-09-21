@@ -70,17 +70,13 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
     _storageBox.put("imageUrl", _imageUrl);
 
     _saveData();
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => const HomePage(),
-      ),
-    );
   }
 
   _saveData() {
+    final userId = user.uid;
+
     final dataObj = <String, dynamic>{
+      "id": userId,
       "name": _storageBox.get("name"),
       "city": _storageBox.get("city"),
       "country": _storageBox.get("country"),
@@ -106,12 +102,15 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
       "imageUrl": _storageBox.get("imageUrl"),
     };
 
-    final userId = user.uid;
-
     if (_storageBox.get("imageUrl") != "") {
-      db.collection("users").doc(userId).set(dataObj).onError(
-            (error, _) => debugPrint("Error Storing Data to Firestore, $error"),
-          );
+      db.collection("users").doc(userId).set(dataObj).then((value) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const HomePage(),
+          ),
+        );
+      });
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_love_right/components/bio_fields.dart';
 import 'package:lets_love_right/components/side_drawer.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -264,39 +265,9 @@ class _ProfilePageState extends State<ProfilePage> {
               field: "Type of Relationship",
               data: _relationType,
             ),
+            const SizedBox(height: 20),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class BioFields extends StatelessWidget {
-  const BioFields({Key? key, required this.field, required this.data})
-      : super(key: key);
-
-  final String field;
-  final String data;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            field,
-            style: const TextStyle(fontSize: 15),
-          ),
-          Text(
-            data,
-            style: const TextStyle(fontSize: 15),
-          ),
-        ],
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_love_right/pages/view_all_page.dart';
 import 'package:lets_love_right/components/user_page.dart';
@@ -12,12 +13,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final user = FirebaseAuth.instance.currentUser!;
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   List _dataList = [];
 
   _readData() async {
-    final docRef = db.collection("users");
+    final userId = user.uid;
+    final docRef = db.collection("users").where("id", isNotEqualTo: userId);
     QuerySnapshot querySnapshot = await docRef.get();
     final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
     setState(() {
@@ -33,15 +36,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("List Length : ${_dataList.length}");
-
     if (_dataList.isEmpty) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text("Loading ..."),
-        ),
-        body: const Center(
-          child: Text("Loading ..."),
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
         ),
       );
     }
@@ -116,6 +114,7 @@ class _HomePageState extends State<HomePage> {
                 itemCount: _dataList.length,
                 itemBuilder: (e, index) {
                   return ScrollList(
+                    userId: _dataList[index]["id"],
                     userName: _dataList[index]["name"],
                     imageUrl: _dataList[index]["imageUrl"],
                   );
@@ -207,10 +206,15 @@ class TopCard extends StatelessWidget {
 }
 
 class ScrollList extends StatelessWidget {
-  const ScrollList({Key? key, required this.imageUrl, required this.userName})
+  const ScrollList(
+      {Key? key,
+      required this.imageUrl,
+      required this.userName,
+      required this.userId})
       : super(key: key);
 
   final String imageUrl;
+  final String userId;
   final String userName;
 
   @override
@@ -268,7 +272,10 @@ class ScrollList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => UserPage(userName: userName),
+                  builder: (_) => UserPage(
+                    userId: userId,
+                    userName: userName,
+                  ),
                 ),
               );
             },
