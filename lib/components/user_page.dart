@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_love_right/components/chat_ui.dart';
 import 'package:lets_love_right/components/bio_fields.dart';
 
 class UserPage extends StatefulWidget {
@@ -275,7 +276,17 @@ class _UserPageState extends State<UserPage> {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: TextButton(
-                onPressed: (){},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ChatUIPage(
+                        userId: widget.userId,
+                        userName: _userName,
+                      ),
+                    ),
+                  );
+                },
                 child: const Text(
                   "MESSAGE",
                   style: TextStyle(

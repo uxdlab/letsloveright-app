@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lets_love_right/pages/home_page.dart';
 import 'package:lets_love_right/pages/signup_page.dart';
+import 'package:lets_love_right/components/bottom_navbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
           (value) => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => const HomePage(),
+              builder: (_) => const BottomNavigator(),
             ),
           ),
         )
@@ -241,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (_) => const SignupPage(),

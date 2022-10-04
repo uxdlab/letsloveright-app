@@ -42,7 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (_) => const LoginPage(),
@@ -96,7 +96,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
 // Onboarding Screen Pages
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({Key? key, required this.pageContent}) : super(key: key);
+  const OnboardingPage({
+    Key? key,
+    required this.pageContent,
+  }) : super(key: key);
 
   final String pageContent;
 
