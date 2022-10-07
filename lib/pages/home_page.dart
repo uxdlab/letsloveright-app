@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_love_right/pages/view_all_page.dart';
 import 'package:lets_love_right/components/user_page.dart';
-import 'package:lets_love_right/components/side_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,98 +29,91 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    super.initState();
     _readData();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     if (_dataList.isEmpty) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
+      return const Center(
+        child: CircularProgressIndicator(),
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("All Matches"),
-      ),
-      drawer: const SideDrawer(),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text(
-                  "Top Matches",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ViewAllPage(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "View All",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.purple,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 225,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _dataList.length,
-                itemBuilder: (e, index) {
-                  return TopCard(
-                    userName: _dataList[index]["name"],
-                    imageUrl: _dataList[index]["imageUrl"],
-                  );
-                }),
-          ),
-          Row(
-            children: const [
-              SizedBox(width: 25),
-              Text(
-                "New Matches",
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                "Top Matches",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ],
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const ViewAllPage(),
+                  ),
+                );
+              },
+              child: const Text(
+                "View All",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.purple,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 225,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _dataList.length,
+              itemBuilder: (e, index) {
+                return TopCard(
+                  userName: _dataList[index]["name"],
+                  imageUrl: _dataList[index]["imageUrl"],
+                );
+              }),
+        ),
+        Row(
+          children: const [
+            SizedBox(width: 25),
+            Text(
+              "New Matches",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Expanded(
+          child: ListView.builder(
+            itemCount: _dataList.length,
+            itemBuilder: (e, index) {
+              return ScrollList(
+                userId: _dataList[index]["id"],
+                userName: _dataList[index]["name"],
+                imageUrl: _dataList[index]["imageUrl"],
+              );
+            },
           ),
-          const SizedBox(height: 5),
-          Expanded(
-            child: ListView.builder(
-                itemCount: _dataList.length,
-                itemBuilder: (e, index) {
-                  return ScrollList(
-                    userId: _dataList[index]["id"],
-                    userName: _dataList[index]["name"],
-                    imageUrl: _dataList[index]["imageUrl"],
-                  );
-                }),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

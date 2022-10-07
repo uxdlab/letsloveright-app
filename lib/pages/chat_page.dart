@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_love_right/components/chat_ui.dart';
-import 'package:lets_love_right/components/side_drawer.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -53,20 +52,16 @@ class _ChatPageState extends State<ChatPage> {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(title: const Text("Messages")),
-      drawer: const SideDrawer(),
-      body: ListView.builder(
-        itemCount: _dataList.length,
-        itemBuilder: (e, index) {
-          final String user = _dataList[index]["users"][0];
-          return ChatUserCard(
-            uid: user,
-            name: _dataList[index][user]["name"],
-            image: _dataList[index][user]["imageUrl"],
-          );
-        },
-      ),
+    return ListView.builder(
+      itemCount: _dataList.length,
+      itemBuilder: (e, index) {
+        final String user = _dataList[index]["users"][0];
+        return ChatUserCard(
+          uid: user,
+          name: _dataList[index][user]["name"],
+          image: _dataList[index][user]["imageUrl"],
+        );
+      },
     );
   }
 }

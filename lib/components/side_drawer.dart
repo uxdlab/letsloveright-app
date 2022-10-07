@@ -253,19 +253,7 @@ class _SideDrawerState extends State<SideDrawer> {
             ),
             child: TextButton(
               onPressed: () {
-                FirebaseAuth.instance
-                    .signOut()
-                    .then(
-                      (value) => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const OnboardingScreen(),
-                        ),
-                      ),
-                    )
-                    .catchError(
-                      (onError) => debugPrint("Error Occurred On Logout"),
-                    );
+                FirebaseAuth.instance.signOut();
               },
               child: const Text(
                 "Logout",
@@ -276,7 +264,6 @@ class _SideDrawerState extends State<SideDrawer> {
               ),
             ),
           ),
-          const SizedBox(height: 20),
         ],
       ),
     );

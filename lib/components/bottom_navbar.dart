@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lets_love_right/pages/chat_page.dart';
 import 'package:lets_love_right/pages/home_page.dart';
 import 'package:lets_love_right/pages/profile_page.dart';
+import 'package:lets_love_right/components/side_drawer.dart';
 
 class BottomNavigator extends StatefulWidget {
   const BottomNavigator({Key? key}) : super(key: key);
@@ -13,13 +14,15 @@ class BottomNavigator extends StatefulWidget {
 class _BottomNavigatorState extends State<BottomNavigator> {
   int _selectedIndex = 0;
 
-  final List<dynamic> _pages = [
+  final List _pages = [
     const HomePage(),
     const ChatPage(),
     const ProfilePage(),
   ];
 
-  void _navigateUser(int index){
+  final List _pageName = ["All Matches", "Messages", "Profile"];
+
+  void _navigateUser(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -28,6 +31,10 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_pageName[_selectedIndex]),
+      ),
+      drawer: const SideDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
