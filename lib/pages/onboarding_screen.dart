@@ -22,13 +22,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             controller: _controller,
             onPageChanged: (index) {
               setState(() {
-                lastPage = (index == 2);
+                lastPage = (index == 3);
               });
             },
             children: const [
-              OnboardingPage(pageContent: "assets/images/onboarding_1.png"),
-              OnboardingPage(pageContent: "assets/images/onboarding_2.png"),
-              OnboardingPage(pageContent: "assets/images/onboarding_3.png"),
+              OnboardingPage(pageContent: "assets/images/onboarding_11.png"),
+              OnboardingPage(pageContent: "assets/images/onboarding_12.png"),
+              OnboardingPage(pageContent: "assets/images/onboarding_13.png"),
+              OnboardingPage(pageContent: "assets/images/onboarding_14.png"),
             ],
           ),
           Container(
@@ -85,7 +86,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             alignment: const Alignment(0, 0.95),
             child: SmoothPageIndicator(
               controller: _controller,
-              count: 3,
+              count: 4,
             ),
           ),
         ],
