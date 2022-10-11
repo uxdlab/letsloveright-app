@@ -119,8 +119,11 @@ class _HomePageState extends State<HomePage> {
 }
 
 class TopCard extends StatelessWidget {
-  const TopCard({Key? key, required this.imageUrl, required this.userName})
-      : super(key: key);
+  const TopCard({
+    Key? key,
+    required this.imageUrl,
+    required this.userName,
+  }) : super(key: key);
 
   final String imageUrl;
   final String userName;

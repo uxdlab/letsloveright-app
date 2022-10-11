@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_love_right/components/drawer_pages.dart';
-import 'package:lets_love_right/pages/onboarding_screen.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({Key? key}) : super(key: key);
@@ -90,25 +89,6 @@ class _SideDrawerState extends State<SideDrawer> {
                   ),
                 ),
               ],
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const DiscoverYourselfPage(),
-                ),
-              );
-            },
-            leading: const Icon(Icons.person_outlined),
-            title: Text(
-              "Discover Yourself",
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.grey[700],
-                fontWeight: FontWeight.bold,
-              ),
             ),
           ),
           ListTile(
@@ -244,6 +224,7 @@ class _SideDrawerState extends State<SideDrawer> {
               ),
             ),
           ),
+          const SizedBox(height: 25),
           Container(
             width: double.infinity,
             margin: const EdgeInsets.all(20),
