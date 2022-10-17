@@ -73,6 +73,14 @@ class _MustHavesPageState extends State<MustHavesPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
+              padding: EdgeInsets.all(15),
+              child: Text(
+                "Please select your top ten statements that fit your must-haves from this list. Examine the list and highlight the items that are your MUST-HAVES.",
+              ),
+            ),
+            const Divider(),
+            const SizedBox(height: 5),
+            const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
                 "Chemistry :",

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lets_love_right/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:lets_love_right/components/bottom_navbar.dart';
 
 class SignupQuestionsFour extends StatefulWidget {
   const SignupQuestionsFour({Key? key}) : super(key: key);
@@ -107,7 +107,7 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => const HomePage(),
+            builder: (_) => const BottomNavigator(),
           ),
         );
       });

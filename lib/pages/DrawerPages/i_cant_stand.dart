@@ -34,9 +34,17 @@ class _ICantStandPageState extends State<ICantStandPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
+              padding: EdgeInsets.all(15),
+              child: Text(
+                "Please select your top ten statements that fit your I-can’t-stands from this list. Examine the list and highlight the items that are your I-CAN’T-STANDS.",
+              ),
+            ),
+            const Divider(),
+            const SizedBox(height: 5),
+            const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
-                "Social Living",
+                "Traits :",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -46,7 +54,7 @@ class _ICantStandPageState extends State<ICantStandPage> {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
-                "Introversion :",
+                "Chemistry :",
                 style: TextStyle(
                   color: Colors.purple,
                 ),
@@ -66,8 +74,7 @@ class _ICantStandPageState extends State<ICantStandPage> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      """I must have a partner who enjoys staying in to have"""
-                      """quiet evenings alone or with small groups of friends.""",
+                      "I can not be with someone that I have to work with to build chemistry.",
                     ),
                   ),
                 ),
@@ -76,7 +83,7 @@ class _ICantStandPageState extends State<ICantStandPage> {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
-                "Extroversion :",
+                "Communication :",
                 style: TextStyle(
                   color: Colors.purple,
                 ),
@@ -96,8 +103,145 @@ class _ICantStandPageState extends State<ICantStandPage> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      """I must have a partner who is social and likes"""
-                      """ to talk to others.""",
+                      "I can’t be with someone who likes to have deep conversations.",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Text(
+                "Humor :",
+                style: TextStyle(
+                  color: Colors.purple,
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Colors.purple,
+                    value: _value2,
+                    onChanged: (bool? val) {
+                      setState(() {
+                        _value2 = val!;
+                      });
+                    }),
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "I can’t have someone who always looks on the bright side of life.",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Colors.purple,
+                    value: _value2,
+                    onChanged: (bool? val) {
+                      setState(() {
+                        _value2 = val!;
+                      });
+                    }),
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "I can’t have someone who always cracks jokes and can’t be serious.",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Text(
+                "Intimacy :",
+                style: TextStyle(
+                  color: Colors.purple,
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Colors.purple,
+                    value: _value2,
+                    onChanged: (bool? val) {
+                      setState(() {
+                        _value2 = val!;
+                      });
+                    }),
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "I can’t have someone who expects me to share my deepest secrets with them.",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Colors.purple,
+                    value: _value2,
+                    onChanged: (bool? val) {
+                      setState(() {
+                        _value2 = val!;
+                      });
+                    }),
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "I can’t have someone who only shows me physically that they love me.",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Colors.purple,
+                    value: _value2,
+                    onChanged: (bool? val) {
+                      setState(() {
+                        _value2 = val!;
+                      });
+                    }),
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "I can’t have someone that only shows me through gifts that they love me.",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Colors.purple,
+                    value: _value2,
+                    onChanged: (bool? val) {
+                      setState(() {
+                        _value2 = val!;
+                      });
+                    }),
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      "I can’t have someone that only shows me through acts of kindness that they do love me.",
                     ),
                   ),
                 ),

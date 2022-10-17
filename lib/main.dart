@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lets_love_right/check_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:lets_love_right/firebase_options.dart';
-import 'package:lets_love_right/model/firebase_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,30 +26,25 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return MultiProvider(
-      providers: [
-        Provider(create: (_) => FirebaseDataProvider()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Let's Love Right",
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          textTheme: GoogleFonts.ubuntuTextTheme(),
-          appBarTheme: const AppBarTheme(
-            elevation: 0,
-            centerTitle: true,
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.transparent,
-            titleTextStyle: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Let's Love Right",
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: GoogleFonts.ubuntuTextTheme(),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          centerTitle: true,
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.transparent,
+          titleTextStyle: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        home: const CheckAuthPage(),
       ),
+      home: const CheckAuthPage(),
     );
   }
 }
