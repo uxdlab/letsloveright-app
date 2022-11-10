@@ -205,25 +205,25 @@ class _SideDrawerState extends State<SideDrawer> {
               ),
             ),
           ),
-          // ListTile(
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (_) => const SettingsPage(),
-          //       ),
-          //     );
-          //   },
-          //   leading: const Icon(Icons.settings),
-          //   title: Text(
-          //     "Settings",
-          //     style: TextStyle(
-          //       fontSize: 15,
-          //       color: Colors.grey[700],
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const SettingsPage(),
+                ),
+              );
+            },
+            leading: const Icon(Icons.settings),
+            title: Text(
+              "Settings",
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.grey[700],
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           const SizedBox(height: 25),
           Container(
             width: double.infinity,

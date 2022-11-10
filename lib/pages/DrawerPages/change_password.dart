@@ -8,11 +8,6 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  
-  void _handleSubmit(){
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
