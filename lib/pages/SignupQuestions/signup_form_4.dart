@@ -100,6 +100,7 @@ class _SignupQuestionsFourState extends State<SignupQuestionsFour> {
       "relationType": _storageBox.get("relationType"),
       "personality": _storageBox.get("personality"),
       "imageUrl": _storageBox.get("imageUrl"),
+      "block": [],
     };
 
     if (_storageBox.get("imageUrl") != "") {

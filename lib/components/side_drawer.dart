@@ -129,37 +129,18 @@ class _SideDrawerState extends State<SideDrawer> {
               ),
             ),
           ),
-          // ListTile(
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (_) => const SubscriptionsPage(),
-          //       ),
-          //     );
-          //   },
-          //   leading: const Icon(Icons.wallet_outlined),
-          //   title: Text(
-          //     "Subscriptions",
-          //     style: TextStyle(
-          //       fontSize: 15,
-          //       color: Colors.grey[700],
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
           ListTile(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const TransactionsPage(),
+                  builder: (_) => const SubscriptionsPage(),
                 ),
               );
             },
-            leading: const Icon(Icons.list_alt),
+            leading: const Icon(Icons.wallet_outlined),
             title: Text(
-              "Transactions",
+              "Subscriptions",
               style: TextStyle(
                 fontSize: 15,
                 color: Colors.grey[700],
@@ -167,6 +148,25 @@ class _SideDrawerState extends State<SideDrawer> {
               ),
             ),
           ),
+          // ListTile(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (_) => const TransactionsPage(),
+          //       ),
+          //     );
+          //   },
+          //   leading: const Icon(Icons.list_alt),
+          //   title: Text(
+          //     "Transactions",
+          //     style: TextStyle(
+          //       fontSize: 15,
+          //       color: Colors.grey[700],
+          //       fontWeight: FontWeight.bold,
+          //     ),
+          //   ),
+          // ),
           ListTile(
             onTap: () {
               Navigator.push(

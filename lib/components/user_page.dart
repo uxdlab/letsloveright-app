@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lets_love_right/components/bottom_navbar.dart';
 import 'package:lets_love_right/components/chat_ui.dart';
 import 'package:lets_love_right/components/bio_fields.dart';
 
@@ -296,6 +297,69 @@ class _UserPageState extends State<UserPage> {
                   ),
                 ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: 175.0,
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.purple[300],
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("User Reported")),
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const BottomNavigator(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Report",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 175.0,
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.purple[300],
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("User Blocked")),
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const BottomNavigator(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Block",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
