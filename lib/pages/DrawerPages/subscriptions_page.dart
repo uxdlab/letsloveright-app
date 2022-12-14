@@ -8,16 +8,11 @@ class SubscriptionsPage extends StatefulWidget {
 }
 
 class _SubscriptionsPageState extends State<SubscriptionsPage> {
-<<<<<<< HEAD
-  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-  final String _productID = '1234565';
-=======
   final _formKey = GlobalKey<FormState>();
   String _firstname = "";
   String _lastname = "";
   String _phone = "";
   String _email = "";
->>>>>>> 44ff2caf864f2c4aa6725bfa543c0b6fe76af15c
 
   _handleSubmit() {
     debugPrint("FirstName : $_firstname");
@@ -27,77 +22,11 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
   }
 
   @override
-<<<<<<< HEAD
-  void dispose() {
-    _subscription!.cancel();
-    super.dispose();
-  }
-
-  void _initialize() async {
-    _available = await _inAppPurchase.isAvailable();
-
-    List<ProductDetails> products = await _getProducts(
-      productIds: <String>{_productID},
-    );
-    debugPrint('products: $products');
-    debugPrint('_available: $_available');
-    setState(() {
-      _products = products;
-    });
-  }
-
-  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
-      switch (purchaseDetails.status) {
-        case PurchaseStatus.pending:
-          //  _showPendingUI();
-          break;
-        case PurchaseStatus.purchased:
-        case PurchaseStatus.restored:
-          break;
-        case PurchaseStatus.error:
-          if (kDebugMode) {
-            print(purchaseDetails.error!);
-          }
-          break;
-        default:
-          break;
-      }
-
-      if (purchaseDetails.pendingCompletePurchase) {
-        await _inAppPurchase.completePurchase(purchaseDetails);
-      }
-    });
-  }
-
-  Future<List<ProductDetails>> _getProducts(
-      {required Set<String> productIds}) async {
-    debugPrint('productIds: $productIds');
-    ProductDetailsResponse response =
-        await _inAppPurchase.queryProductDetails(productIds);
-    debugPrint('_getProducts: $response');
-    return response.productDetails;
-  }
-
-  ListTile _buildProduct({required ProductDetails product}) {
-    return ListTile(
-      leading: const Icon(Icons.attach_money),
-      title: Text('${product.title} - ${product.price}'),
-      subtitle: Text(product.description),
-      trailing: ElevatedButton(
-        onPressed: () {
-          _subscribe(product: product);
-        },
-        child: const Text(
-          'Subscribe',
-        ),
-=======
   Widget build(BuildContext context) {
     TableRow tableRow1 = const TableRow(children: <Widget>[
       Padding(
         padding: EdgeInsets.all(10.0),
         child: Text('Sport'),
->>>>>>> 44ff2caf864f2c4aa6725bfa543c0b6fe76af15c
       ),
       Padding(
         padding: EdgeInsets.all(10.0),
