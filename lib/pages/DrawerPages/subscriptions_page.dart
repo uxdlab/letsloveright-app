@@ -13,7 +13,7 @@ class SubscriptionsPage extends StatefulWidget {
 
 class _SubscriptionsPageState extends State<SubscriptionsPage> {
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-  final String _productID = '3mplan';
+  final String _productID = '1234565';
 
   bool _available = true;
   List<ProductDetails> _products = [];
@@ -53,7 +53,8 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
     List<ProductDetails> products = await _getProducts(
       productIds: <String>{_productID},
     );
-
+    debugPrint('products: $products');
+    debugPrint('_available: $_available');
     setState(() {
       _products = products;
     });
@@ -85,9 +86,10 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
 
   Future<List<ProductDetails>> _getProducts(
       {required Set<String> productIds}) async {
+    debugPrint('productIds: $productIds');
     ProductDetailsResponse response =
         await _inAppPurchase.queryProductDetails(productIds);
-
+    debugPrint('_getProducts: $response');
     return response.productDetails;
   }
 

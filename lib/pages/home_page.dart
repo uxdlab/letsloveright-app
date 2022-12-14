@@ -43,39 +43,6 @@ class _HomePageState extends State<HomePage> {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                "Top Matches",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const ViewAllPage(),
-                  ),
-                );
-              },
-              child: const Text(
-                "View All",
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.purple,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
         SizedBox(
           height: 225,
           child: ListView.builder(

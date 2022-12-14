@@ -303,10 +303,12 @@ class _UserPageState extends State<UserPage> {
               children: [
                 Container(
                   width: 175.0,
+                  height: 40,
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.purple[300],
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Colors.red),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -321,10 +323,10 @@ class _UserPageState extends State<UserPage> {
                       );
                     },
                     child: const Text(
-                      "Report",
+                      "Report User",
                       style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
+                        fontSize: 16,
+                        color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -332,10 +334,12 @@ class _UserPageState extends State<UserPage> {
                 ),
                 Container(
                   width: 175.0,
+                  height: 40,
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.purple[300],
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Colors.red),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -350,10 +354,10 @@ class _UserPageState extends State<UserPage> {
                       );
                     },
                     child: const Text(
-                      "Block",
+                      "Block User",
                       style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
+                        fontSize: 16,
+                        color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

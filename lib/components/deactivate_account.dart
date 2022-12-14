@@ -6,9 +6,9 @@ class DeactivateAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Deactivate Account")),
+      appBar: AppBar(title: const Text("Delete Account")),
       body: const Center(
-        child: Text("Deactivate Account"),
+        child: Text("Delete Account"),
       ),
     );
   }

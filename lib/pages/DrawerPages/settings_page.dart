@@ -42,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {
               user.delete().then((value) {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => const LoginPage(),
@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             leading: const Icon(Icons.person_off_outlined),
             title: const Text(
-              "Deactivate Account",
+              "Delete Account",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
