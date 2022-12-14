@@ -19,9 +19,7 @@ class _UserPageState extends State<UserPage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   String _userName = "";
-  String _imageUrl =
-      "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif";
-
+  String _imageUrl ="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif";
   String _maritalStatus = "";
   String _race = "";
   String _height = "";
@@ -39,14 +37,12 @@ class _UserPageState extends State<UserPage> {
 
   _readData() {
     final docRef = db.collection("users").doc(widget.userId);
-
     docRef.get().then(
       (DocumentSnapshot doc) {
         final data = doc.data() as Map<String, dynamic>;
         setState(() {
           _userName = data["name"];
           _imageUrl = data["imageUrl"];
-
           _maritalStatus = data["maritalStatus"];
           _race = data["race"];
           _height = data["height"];
@@ -302,7 +298,7 @@ class _UserPageState extends State<UserPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  width: 175.0,
+                  width: 160.0,
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.purple[300],
@@ -310,6 +306,8 @@ class _UserPageState extends State<UserPage> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      final docRef = db.collection("users").doc(widget.userId);
+                      docRef.delete();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("User Reported")),
                       );
@@ -331,7 +329,7 @@ class _UserPageState extends State<UserPage> {
                   ),
                 ),
                 Container(
-                  width: 175.0,
+                  width: 160,
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.purple[300],
@@ -339,6 +337,8 @@ class _UserPageState extends State<UserPage> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      final docRef = db.collection("users").doc(widget.userId);
+                      docRef.delete();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("User Blocked")),
                       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lets_love_right/pages/SignupQuestions/terms_conditions.dart';
 import 'package:lets_love_right/pages/login_page.dart';
 import 'package:lets_love_right/pages/SignupQuestions/signup_form_1.dart';
 
@@ -9,8 +10,8 @@ class SignupPage extends StatefulWidget {
   @override
   State<SignupPage> createState() => _SignupPageState();
 }
-
 class _SignupPageState extends State<SignupPage> {
+  bool _value100 = false;
   final _formKey = GlobalKey<FormState>();
   String _user = "";
   String _pass = "";
@@ -44,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
         }
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Password Does Not Match")),
       );
     }
@@ -157,6 +158,45 @@ class _SignupPageState extends State<SignupPage> {
                       }
                       return null;
                     },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                          activeColor: Colors.purple,
+                          value: _value100,
+                          onChanged: (bool? val) {
+                            setState(() {
+                              _value100 = val!;
+                            });
+                          }),
+                      const Text(
+                        "I agree to the",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const TermsConditions(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "let's love right Terms.",
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(
