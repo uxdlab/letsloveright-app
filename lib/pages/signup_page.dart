@@ -10,12 +10,13 @@ class SignupPage extends StatefulWidget {
   @override
   State<SignupPage> createState() => _SignupPageState();
 }
+
 class _SignupPageState extends State<SignupPage> {
-  bool _value100 = false;
   final _formKey = GlobalKey<FormState>();
   String _user = "";
   String _pass = "";
   String _confirmPass = "";
+  bool _value100 = false;
 
   _handleSignUp() async {
     if (_pass == _confirmPass) {
@@ -45,7 +46,7 @@ class _SignupPageState extends State<SignupPage> {
         }
       }
     } else {
-        ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Password Does Not Match")),
       );
     }
@@ -169,7 +170,7 @@ class _SignupPageState extends State<SignupPage> {
                           value: _value100,
                           onChanged: (bool? val) {
                             setState(() {
-                              _value100 = val!;
+                              _value100 = val ?? false;
                             });
                           }),
                       const Text(
@@ -207,11 +208,18 @@ class _SignupPageState extends State<SignupPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _handleSignUp();
-                      }
-                    },
+                    onPressed: _value100
+                        ? () {
+                            if (_formKey.currentState!.validate()) {
+                              _handleSignUp();
+                            }
+                            const snackBar = SnackBar(
+                              content: Text("Data Added"),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        : null,
                     child: const Text(
                       "SIGN UP",
                       style: TextStyle(

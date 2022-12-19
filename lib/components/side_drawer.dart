@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lets_love_right/components/drawer_pages.dart';
+import 'package:lets_love_right/pages/login_page.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({Key? key}) : super(key: key);
@@ -234,7 +235,14 @@ class _SideDrawerState extends State<SideDrawer> {
             ),
             child: TextButton(
               onPressed: () {
-                FirebaseAuth.instance.signOut();
+                FirebaseAuth.instance.signOut().then(
+                      (value) => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const LoginPage(),
+                        ),
+                      ),
+                    );
               },
               child: const Text(
                 "Logout",

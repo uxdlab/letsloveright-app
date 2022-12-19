@@ -19,7 +19,8 @@ class _UserPageState extends State<UserPage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   String _userName = "";
-  String _imageUrl ="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif";
+  String _imageUrl =
+      "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif";
   String _maritalStatus = "";
   String _race = "";
   String _height = "";
@@ -298,17 +299,13 @@ class _UserPageState extends State<UserPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-<<<<<<< HEAD
-                  width: 175.0,
-                  height: 40,
-=======
                   width: 160.0,
->>>>>>> 44ff2caf864f2c4aa6725bfa543c0b6fe76af15c
+                  height: 40,
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.red),
+                    border: Border.all(color: Colors.purple),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -328,24 +325,20 @@ class _UserPageState extends State<UserPage> {
                       "Report User",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: Colors.purple,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
                 Container(
-<<<<<<< HEAD
-                  width: 175.0,
+                  width: 160.0,
                   height: 40,
-=======
-                  width: 160,
->>>>>>> 44ff2caf864f2c4aa6725bfa543c0b6fe76af15c
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.red),
+                    border: Border.all(color: Colors.purple),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -365,7 +358,7 @@ class _UserPageState extends State<UserPage> {
                       "Block User",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: Colors.purple,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
